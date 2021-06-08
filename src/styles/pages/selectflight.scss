@@ -1,0 +1,95 @@
+.selectflight-page {
+  .header {
+    padding: 15px 20px;
+    justify-content: center;
+    height: 60px;
+    background-color: $flight-header-bg;
+    display: flex;
+    align-items: center;
+    color: white;
+    & > div {
+      width: calc(#{$flight-cart-width} + #{$flight-ticketpanel-width});
+      display: flex;
+      justify-content: end;
+    }
+    .linktohome {
+      display: flex;
+    }
+
+    img {
+      width: 28px;
+    }
+    .fromto {
+      display: flex;
+      margin-left: 125px;
+      .from-station {
+        span {
+          text-transform: uppercase;
+          font-size: 0.6rem;
+        }
+        p {
+          text-transform: capitalize;
+          font-size: 1.2rem;
+          margin: 0;
+        }
+      }
+      .arrow-icons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: 40px;
+        margin-right: 40px;
+      }
+      .to-station {
+        display: flex;
+        align-items: flex-end;
+        p {
+          text-transform: capitalize;
+          font-size: 1.2rem;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .body {
+    height: auto;
+    .title-panel {
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h1 {
+        color: $flight-title-color;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-left: 25px;
+        font-weight: 100;
+        font-size: 2.3rem;
+      }
+    }
+    .content-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: calc(#{$flight-cart-width} + #{$flight-ticketpanel-width});
+      margin: 0 auto;
+      .cart {
+        .paybutton {
+          margin-top: 20px;
+          width: 100%;
+          padding: 15px;
+          cursor: pointer;
+          border-radius: 3px;
+          border: none;
+          text-transform: uppercase;
+          color: white;
+          background: $main-color;
+          &.disabled {
+            background: $secondary-color;
+          }
+        }
+      }
+    }
+  }
+}

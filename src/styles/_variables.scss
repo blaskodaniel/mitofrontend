@@ -1,0 +1,42 @@
+/** BREAKPOINTS **/
+$breakpoints_xxs: 380px;
+$breakpoints_xs: 480px;
+$breakpoints_sm: 576px;
+$breakpoints_md: 768px;
+$breakpoints_lg: 992px;
+$breakpoints_xl: 1200px;
+$breakpoints_xxl: 1600px;
+
+/** SIZES **/
+$flight-cart-width: 230px;
+$flight-ticketpanel-width: 733px;
+
+/** COLORS **/
+$main-color: #c6007e;
+$secondary-color: #919191;
+$home-box-header-bg: #06038d;
+$home-box-body-bg: #ffffff;
+$home-box-button-bg: #3434e0;
+$home-box-primary-color: $secondary-color;
+$home-box-warning-color: $main-color;
+
+$flight-header-bg: $home-box-header-bg;
+$flight-title-color: #0a008b;
+$flight-ticketlist-header-bg: #f2f2f2;
+$flight-ticketlist-header-title-color: $secondary-color;
+$flight-ticketlist-header-city-color: $home-box-header-bg;
+$flight-ticket-box-border-color: $main-color;
+$flight-ticket-item-border-color: #e5e5e5;
+$flight-ticket-box-middle-bg: #f2f2f2;
+$flight-ticket-box-selected-bg: $main-color;
+$flight-noreturndate-btn-color: #3434e0;
+
+$flight-cart-border-top-color: #c1c1c1;
+$flight-cart-footer-bg: $home-box-header-bg;
+$flight-cart-date-bg: #e1e1e1;
+$flight-cart-font-color: #343434;
+$flight-cart-price-color: #06038d;
+
+$modal-header-bg: #f2f2f2;
+$modal-header-text-color: #06038d;
+$modal-footer-reset-color: #c6007e;

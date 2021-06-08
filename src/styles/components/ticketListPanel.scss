@@ -1,0 +1,145 @@
+.ticketlistpanel {
+  width: $flight-ticketpanel-width;
+  box-shadow: 6px 6px 15px 0px #0000001a;
+  margin-bottom: 40px;
+  .panel-header {
+    background-color: $flight-ticketlist-header-bg;
+    padding: 20px;
+    display: flex;
+    font-size: 1.3rem;
+    height: 58px;
+    align-items: center;
+    .title {
+      text-transform: uppercase;
+      color: $flight-ticketlist-header-title-color;
+      flex-grow: 1;
+    }
+    .from-to {
+      flex-grow: 3;
+      align-items: center;
+      img {
+        margin-left: 20px;
+        margin-right: 20px;
+      }
+      display: flex;
+      color: $flight-ticketlist-header-city-color;
+    }
+  }
+
+  .date-choose {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    .left-part {
+      display: flex;
+      text-transform: uppercase;
+      align-items: center;
+      font-size: 0.7rem;
+      cursor: pointer;
+      span.date {
+        margin-left: 5px;
+      }
+    }
+    .right-part {
+      display: flex;
+      text-transform: uppercase;
+      align-items: center;
+      font-size: 0.7rem;
+      cursor: pointer;
+      span.date {
+        margin-right: 5px;
+      }
+    }
+
+    .middle-part {
+      font-size: 1.3rem;
+    }
+  }
+  .noreturndate {
+    padding: 40px 20px 50px 20px;
+    background: white;
+    display: flex;
+    justify-content: center;
+    .noreturndate-button {
+      background: $flight-noreturndate-btn-color;
+      padding: 15px 20px;
+      color: white;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      margin-left: 15px;
+      cursor: pointer;
+    }
+  }
+  .tickets {
+    background-color: white;
+    position: relative;
+    .price-category {
+      display: flex;
+      justify-content: space-evenly;
+      position: absolute;
+      width: 100%;
+      top: 3px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      div:nth-child(1) {
+        flex-grow: 1;
+      }
+      div:nth-child(2) {
+        flex-grow: 3;
+        flex-grow: 3;
+        margin: 0px 7px;
+        display: flex;
+        justify-content: space-evenly;
+        & > div {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    }
+    .ticket-item {
+      display: flex;
+      border-top: 1px solid $flight-ticket-item-border-color;
+      .time {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        padding: 20px 16px;
+        img {
+          margin-right: 5px;
+          margin-left: 5px;
+        }
+      }
+      .prices {
+        flex-grow: 3;
+
+        .price-box-list {
+          display: flex;
+          justify-content: space-evenly;
+          .price-box-wrapper {
+            padding: 20px 16px;
+            &.highlight {
+              background: $flight-ticket-box-middle-bg;
+            }
+            .price-box {
+              text-align: center;
+              width: 160px;
+              border: 2px solid $flight-ticket-box-border-color;
+              font-size: 1.4rem;
+              padding: 12px 2px;
+              cursor: pointer;
+              &:hover,
+              &.selected {
+                background: $flight-ticket-box-selected-bg;
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
