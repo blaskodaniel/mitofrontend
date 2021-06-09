@@ -40,10 +40,20 @@ const theme = createMuiTheme({
   },
 });
 
-const SelectField = ({ name, label, options, onChangeHandler, stateobject, setter, validation, icon, warningmsg }) => {
+const SelectField = ({
+  name,
+  label,
+  options,
+  onChangeHandler,
+  stateobject,
+  setter,
+  validation,
+  warningmsg,
+  initvalue,
+}) => {
   const [value, setvalue] = useState({ shortName: '' });
 
-  const changeHandler = (event, value) => {
+  const changeHandler = (_, value) => {
     setvalue(value);
     const newstate = { ...stateobject, value: value?.iata || null };
     setter(newstate);
@@ -59,7 +69,7 @@ const SelectField = ({ name, label, options, onChangeHandler, stateobject, sette
       <Autocomplete
         options={options}
         value={value}
-        getOptionLabel={(option) => option.shortName}
+        getOptionLabel={(option) => option.shortName || ''}
         id={name}
         includeInputInList
         onChange={changeHandler}

@@ -1,6 +1,12 @@
 @mixin screen($breakpoint) {
   // $breakpoint is simply a variable that can have several values
 
+  @if $breakpoint==maxlg {
+    @media only screen and (max-width: $breakpoints_lg) {
+      @content;
+    }
+  }
+
   @if $breakpoint==smallmonitor {
     @media only screen and (max-width: $breakpoints_md) {
       @content;

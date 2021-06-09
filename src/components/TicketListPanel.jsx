@@ -72,9 +72,10 @@ const TicketListPanel = ({
   noreturndate = false,
   research,
   loading = false,
+  mindate,
 }) => {
   const [returnfield, setreturnfield] = useState({ value: '', name: 'return', required: false });
-  const [returnfieldIsValid, setreturnfieldIsValid] = useState(null);
+  const [returnfieldIsValid] = useState(null);
 
   const search = () => {
     research(returnfield);
@@ -102,6 +103,7 @@ const TicketListPanel = ({
             stateobject={returnfield}
             setter={setreturnfield}
             icon={calendaricon}
+            mindate={new Date(dayjs(mindate).add(1, 'day')) || new Date()}
             validation={returnfieldIsValid}
             onChangeHandler={(state) => setreturnfield(state)}
             warningmsg="Date is incorrect"

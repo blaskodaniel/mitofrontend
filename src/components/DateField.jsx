@@ -13,6 +13,7 @@ const DateField = ({
   validation,
   icon,
   warningmsg,
+  mindate,
 }) => {
   const [selectdate, setselectdate] = useState();
 
@@ -42,7 +43,12 @@ const DateField = ({
   return (
     <div className="input-component">
       <div className="input-wrapper">
-        <DatePicker onChange={(date) => changeHandler(date)} dateFormat="YYYY-MM-DD" customInput={<CustomInput />} />
+        <DatePicker
+          onChange={(date) => changeHandler(date)}
+          dateFormat="YYYY-MM-DD"
+          minDate={mindate || new Date()}
+          customInput={<CustomInput />}
+        />
         <label className="input-label" htmlFor={name}>
           {label}
         </label>

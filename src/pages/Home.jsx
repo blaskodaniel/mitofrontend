@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 import { useHistory } from 'react-router';
 import { useResetRecoilState } from 'recoil';
 import { cart } from '../state/atoms';
+import { getLocalStorage, setLocalStorage } from '../utils/helpers';
 
 const HomePage = () => {
   const history = useHistory();
@@ -57,18 +58,18 @@ const HomePage = () => {
       dayjs(departurefield.value).isAfter(returnfield.value, 'day') ||
       dayjs(departurefield.value).isBefore(new Date(), 'day')
     ) {
-      console.log('Dátumok nem jók', departurefield.value);
       setdateError(true);
     } else {
-      console.log('Dátumok jók', departurefield.value);
       setdateError(false);
     }
   }, [departurefield.value, returnfield.value]);
 
   const onSubmitHandler = () => {
-    // Validation
     if (originfieldIsValid && destinationfieldIsValid && departurefieldIsValid && !dateError) {
+      // Reset cart state
       resetcart();
+      // Set origin and destinaton city into localstorage
+      setLocalStorage({ origin: originfield.value, destination: destinationfield.value });
       if (returnfield.value && returnfield.value !== 'Invalid Date') {
         history.push(
           `/flight?dep=${originfield.value}&arr=${destinationfield.value}&depdate=${departurefield.value}&retdate=${returnfield.value}`,
@@ -77,6 +78,7 @@ const HomePage = () => {
         history.push(`/flight?dep=${originfield.value}&arr=${destinationfield.value}&depdate=${departurefield.value}`);
       }
     } else {
+      // Validation
       validation(originfield, setoriginfieldIsValid);
       validation(destinationfield, setdestinationfieldIsValid);
       validation(departurefield, setdeparturefieldIsValid);
@@ -87,8 +89,8 @@ const HomePage = () => {
     const getstations = async () => {
       try {
         const response = await GetAllStation();
-        setstations(response.data);
-        setdestinationStations(response.data);
+        setstations(response.data.sort((a, b) => a.shortName.localeCompare(b.shortName)));
+        setdestinationStations(response.data.sort((a, b) => a.shortName.localeCompare(b.shortName)));
       } catch (e) {
         console.log('Error during get stations');
       }
@@ -118,8 +120,9 @@ const HomePage = () => {
               label="Origin"
               stateobject={originfield}
               setter={setoriginfield}
-              options={stations.sort((x, y) => x.shortName - y.shortName)}
+              options={stations}
               validation={originfieldIsValid}
+              initvalue={stations?.find((x) => x.iata === getLocalStorage()?.origin)}
               onChangeHandler={(state) => validation(state, setoriginfieldIsValid)}
               warningmsg="Please select origin"
             />
@@ -128,8 +131,9 @@ const HomePage = () => {
               label="Destination"
               stateobject={destinationfield}
               setter={setdestinationfield}
-              options={destinationStations.sort((x, y) => x.shortName - y.shortName)}
+              options={destinationStations}
               validation={destinationfieldIsValid}
+              initvalue={stations?.find((x) => x.iata === getLocalStorage()?.destination)}
               onChangeHandler={(state) => validation(state, setdestinationfieldIsValid)}
               warningmsg="Please select destination"
             />
@@ -149,6 +153,7 @@ const HomePage = () => {
               label="Return"
               placeholder="Return"
               stateobject={returnfield}
+              mindate={new Date(dayjs(departurefield.value).add(1, 'day')) || new Date()}
               setter={setreturnfield}
               icon={calendaricon}
               validation={returnfieldIsValid}

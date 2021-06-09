@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { useRecoilValue } from 'recoil';
 import { cart } from '../state/atoms';
 import { price } from '../state/selectors';

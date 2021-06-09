@@ -26,8 +26,6 @@ export const price = selector({
     if (cartValue?.to?.price.price) {
       sum += parseFloat(cartValue?.to?.price.price);
     }
-
-    console.log(sum);
     return sum;
   },
 });

@@ -10,7 +10,10 @@
     & > div {
       width: calc(#{$flight-cart-width} + #{$flight-ticketpanel-width});
       display: flex;
-      justify-content: end;
+      justify-content: flex-start;
+      @include screen(smallmonitor) {
+        width: 100%;
+      }
     }
     .linktohome {
       display: flex;
@@ -89,6 +92,10 @@
             background: $secondary-color;
           }
         }
+      }
+
+      @include screen(smallmonitor) {
+        grid-template-columns: 1fr;
       }
     }
   }

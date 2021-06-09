@@ -8,5 +8,5 @@ export const Search = (dep, arr, date) => {
 };
 
 export const GetAllStation = () => {
-  return APIClient.get('https://mock-air.herokuapp.com/asset/stations');
+  return APIClient.get(process.env.REACT_APP_ALLSTATION);
 };

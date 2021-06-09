@@ -60,7 +60,7 @@ const SelectFlightPage = () => {
       if (dayjs(returndate.value).isAfter(depdate)) {
         SearchFn(arrival, departure, returndate.value, true);
       } else {
-        console.log('Dátumok nemj jó');
+        console.log('Dates not correct');
       }
     },
     [SearchFn, arrival, departure, depdate],
@@ -156,6 +156,7 @@ const SelectFlightPage = () => {
                 to={fromCity?.shortName}
                 searchdata={searchReturnData}
                 depdate={retdate}
+                mindate={depdate}
                 noreturndate
                 loading={searchReturnLoader}
                 research={(date) => ResearchFn(date)}
