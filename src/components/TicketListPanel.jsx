@@ -4,6 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import calendaricon from '../assets/icons/icon-calendar.svg';
 import { addToCart } from '../state/selectors';
 import DateField from './DateField';
+import Loader from './Loader';
 
 const TicketItem = ({ from, to, dep, arr, prices, type }) => {
   const addAction = useSetRecoilState(addToCart);
@@ -61,7 +62,17 @@ const TicketItem = ({ from, to, dep, arr, prices, type }) => {
   );
 };
 
-const TicketListPanel = ({ title, from, to, searchdata, type, depdate, noreturndate = false, research }) => {
+const TicketListPanel = ({
+  title,
+  from,
+  to,
+  searchdata,
+  type,
+  depdate,
+  noreturndate = false,
+  research,
+  loading = false,
+}) => {
   const [returnfield, setreturnfield] = useState({ value: '', name: 'return', required: false });
   const [returnfieldIsValid, setreturnfieldIsValid] = useState(null);
 
@@ -80,7 +91,9 @@ const TicketListPanel = ({ title, from, to, searchdata, type, depdate, noreturnd
         </div>
       </div>
 
-      {noreturndate && (
+      {loading && <Loader />}
+
+      {noreturndate && !loading && (
         <div className="noreturndate">
           <DateField
             name="retunr"
@@ -98,7 +111,7 @@ const TicketListPanel = ({ title, from, to, searchdata, type, depdate, noreturnd
           </button>
         </div>
       )}
-      {!noreturndate && (
+      {!noreturndate && !loading && (
         <div>
           <div className="date-choose">
             <div className="left-part">

@@ -16,6 +16,8 @@ const SelectFlightPage = () => {
   const [stations, setstations] = useState([]);
   const [searchData, setsearchData] = useState([]);
   const [searchReturnData, setsearchReturnData] = useState([]);
+  const [searchLoader, setsearchLoader] = useState(false);
+  const [searchReturnLoader, setsearchReturnLoader] = useState(false);
   const departure = new URLSearchParams(search).get('dep');
   const arrival = new URLSearchParams(search).get('arr');
   const depdate = new URLSearchParams(search).get('depdate');
@@ -29,12 +31,16 @@ const SelectFlightPage = () => {
   };
 
   const payNow = () => {
-    console.log('pay');
     toggleModal();
   };
 
   const SearchFn = useCallback(async (departure, arrival, depdate, isreturn = false) => {
     try {
+      if (isreturn) {
+        setsearchReturnLoader(true);
+      } else {
+        setsearchLoader(true);
+      }
       const resp = await Search(departure, arrival, depdate);
       if (isreturn) {
         setsearchReturnData(resp.data);
@@ -43,6 +49,9 @@ const SelectFlightPage = () => {
       }
     } catch (e) {
       console.log('Error');
+    } finally {
+      setsearchLoader(false);
+      setsearchReturnLoader(false);
     }
   }, []);
 
@@ -127,6 +136,7 @@ const SelectFlightPage = () => {
               to={toCity?.shortName}
               searchdata={searchData}
               depdate={depdate}
+              loading={searchLoader}
               type="from"
             />
             {searchReturnData.length > 0 ? (
@@ -135,7 +145,8 @@ const SelectFlightPage = () => {
                 from={toCity?.shortName}
                 to={fromCity?.shortName}
                 searchdata={searchReturnData}
-                depdate={retdate}
+                depdate={retdate || searchReturnData[0].arrival}
+                loading={searchReturnLoader}
                 type="to"
               />
             ) : (
@@ -146,6 +157,7 @@ const SelectFlightPage = () => {
                 searchdata={searchReturnData}
                 depdate={retdate}
                 noreturndate
+                loading={searchReturnLoader}
                 research={(date) => ResearchFn(date)}
                 type="to"
               />
@@ -156,7 +168,7 @@ const SelectFlightPage = () => {
       <Modal
         isOpen={isOpen}
         onRequestClose={toggleModal}
-        contentLabel="My dialog"
+        contentLabel="Pay dialog"
         className="mymodal"
         overlayClassName="myoverlay"
         ariaHideApp={false}
